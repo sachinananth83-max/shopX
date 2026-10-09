@@ -1,0 +1,292 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopX - Online Shopping</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f6fa;
+            color: #222;
+        }
+
+        header {
+            background: linear-gradient(90deg, #6c5ce7, #a55eea);
+            color: white;
+            padding: 22px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        header h1 {
+            font-size: 30px;
+        }
+
+        header span {
+            color: #ffeaa7;
+        }
+
+        .cart {
+            background: white;
+            color: #6c5ce7;
+            padding: 12px 18px;
+            border-radius: 25px;
+            font-weight: bold;
+        }
+
+        .hero {
+            margin: 30px auto;
+            width: 88%;
+            padding: 55px 35px;
+            border-radius: 22px;
+            background: linear-gradient(120deg, #dfe6ff, #ffe3f1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .hero h2 {
+            font-size: 38px;
+            color: #4834d4;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .hero img {
+            width: 220px;
+            max-width: 100%;
+        }
+
+        .shop-btn {
+            background: #6c5ce7;
+            color: white;
+            border: none;
+            padding: 13px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .shop-btn:hover {
+            background: #4834d4;
+        }
+
+        .search {
+            display: block;
+            width: 84%;
+            max-width: 550px;
+            padding: 15px;
+            margin: 30px auto;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            font-size: 16px;
+            outline-color: #6c5ce7;
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 35px 0 10px;
+            font-size: 28px;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 25px;
+            padding: 30px 8%;
+        }
+
+        .product {
+            background: white;
+            padding: 20px;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 5px 18px #0000000d;
+            transition: 0.3s;
+        }
+
+        .product:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px #6c5ce733;
+        }
+
+        .product img {
+            width: 100%;
+            height: 170px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+
+        .product h3 {
+            margin-bottom: 10px;
+        }
+
+        .price {
+            color: #6c5ce7;
+            font-size: 21px;
+            font-weight: bold;
+            margin: 12px 0;
+        }
+
+        .product button {
+            width: 100%;
+            background: #6c5ce7;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .product button:hover {
+            background: #00b894;
+        }
+
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 25px;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .hero {
+                padding: 35px 22px;
+                text-align: center;
+                justify-content: center;
+            }
+
+            .hero h2 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>✨ Shop<span>X</span></h1>
+        <div class="cart">🛒 Cart: <span id="cart">0</span></div>
+    </header>
+
+    <section class="hero">
+        <div>
+            <h2>Big Style. Best Price!</h2>
+            <p>Discover your favourite products at amazing prices.</p>
+            <button class="shop-btn"
+                onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
+                Shop Now →
+            </button>
+        </div>
+
+        <img src="https://placehold.co/250x200/e0d7ff/6c5ce7?text=Shopping+Time"
+             alt="Shopping">
+    </section>
+
+    <input
+        class="search"
+        type="text"
+        id="search"
+        placeholder="🔍 Search your favourite product..."
+        oninput="searchProducts()">
+
+    <h2 class="section-title" id="products">🔥 Trending Products</h2>
+
+    <div class="products" id="productList">
+
+        <div class="product" data-name="shoes">
+            <img src="https://placehold.co/200x170/f1f2f6/6c5ce7?text=Shoes"
+                 alt="Shoes">
+            <h3>Sport Shoes</h3>
+            <p>Comfortable & Stylish</p>
+            <div class="price">₹999</div>
+            <button onclick="addCart('Sport Shoes')">Add to Cart 🛒</button>
+        </div>
+
+        <div class="product" data-name="watch">
+            <img src="https://placehold.co/200x170/f1f2f6/6c5ce7?text=Watch"
+                 alt="Watch">
+            <h3>Smart Watch</h3>
+            <p>Modern Everyday Style</p>
+            <div class="price">₹1,499</div>
+            <button onclick="addCart('Smart Watch')">Add to Cart 🛒</button>
+        </div>
+
+        <div class="product" data-name="headphones">
+            <img src="https://placehold.co/200x170/f1f2f6/6c5ce7?text=Headphones"
+                 alt="Headphones">
+            <h3>Headphones</h3>
+            <p>Enjoy Your Favourite Music</p>
+            <div class="price">₹799</div>
+            <button onclick="addCart('Headphones')">Add to Cart 🛒</button>
+        </div>
+
+        <div class="product" data-name="bag">
+            <img src="https://placehold.co/200x170/f1f2f6/6c5ce7?text=Backpack"
+                 alt="Backpack">
+            <h3>Travel Backpack</h3>
+            <p>Perfect for Everyday Use</p>
+            <div class="price">₹699</div>
+            <button onclick="addCart('Travel Backpack')">Add to Cart 🛒</button>
+        </div>
+
+    </div>
+
+    <footer>
+        <h3>✨ ShopX</h3>
+        <p>Happy Shopping! ❤️</p>
+        <p>© 2026 ShopX Online Store</p>
+    </footer>
+
+    <script>
+        let count = 0;
+
+        function addCart(productName) {
+            count++;
+            document.getElementById("cart").textContent = count;
+            alert(productName + " added to cart! 🎉");
+        }
+
+        function searchProducts() {
+            let search = document.getElementById("search")
+                .value.toLowerCase();
+
+            let products = document.querySelectorAll(".product");
+
+            products.forEach(function(product) {
+                let name = product.dataset.name;
+
+                product.style.display =
+                    name.includes(search) ? "block" : "none";
+            });
+        }
+    </script>
+
+</body>
+</html>
